@@ -28,10 +28,11 @@ jobs:
           docker build -t myfastapiapp .
 
       - name: Save Docker image as artifact
+        run: |
+          docker save myfastapiapp > myfastapiapp.tar
+
+      - name: Upload Docker image artifact
         uses: actions/upload-artifact@v2
         with:
           name: myfastapiapp
-          path: |
-            ./myfastapiapp.tar
-        run: |
-          docker save myfastapiapp > myfastapiapp.tar
+          path: ./myfastapiapp.tar
